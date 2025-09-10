@@ -1,0 +1,22 @@
+server:
+    port: 8888  # config service 애플리케이션이 듣는 포트
+    tomcat: 
+        connection-timeout: 2s
+        keep-alive-timeout: 15s
+        threads:
+            max: 50
+            min-spare: 5
+
+spring:
+    application:
+        name: config-service
+    cloud:
+        config:
+            server:
+                git:
+                    uri:  https://github.com/jjyj2302/config-repo.git # 설정 저장소의 Git URL
+                    default-label: master 
+                    timeout: 5   # 원격 저장소와의 연결시 시간 한도
+                    clone-on-start: true # 애플리케이션 시작 시 Git 저장소를 복제본을 로컬에 저장
+                    force-pull: true # 로컬 저장본이 원격 저장소와 다를 경우 원격 저장소로부터 다운로드
+            
